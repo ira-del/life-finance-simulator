@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  /* Palette de couleurs sombre & premium */
+  --color-background: #0a0e17;
+  --color-surface: #10141f;
+  --color-primary: #6366f1;
+  --color-secondary: #06b6d4;
+  --color-accent: #a855f7;
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-warning: #f59e0b;
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #94a3b8;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* Effet glassmorphism réutilisable */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Dégradé de fond pour la page principale */
+.gradient-bg {
+  background: radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.15), transparent 40%),
+              radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.15), transparent 40%),
+              var(--color-background);
+}
