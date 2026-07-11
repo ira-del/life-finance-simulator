@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { logout } from "@/app/actions/auth";
@@ -66,21 +67,29 @@ export default async function DashboardPage() {
     <main className="min-h-screen gradient-bg p-6 md:p-10">
       <div className="max-w-5xl mx-auto">
         {/* En-tête */}
-        <div className="flex items-center justify-between mb-8">
+<div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold">Tableau de bord</h1>
             <p className="text-[var(--color-text-secondary)] text-sm">
               {user!.email} · {profile.province}
             </p>
           </div>
-          <form action={logout}>
-            <button
-              type="submit"
-              className="rounded-lg bg-white/10 hover:bg-white/20 transition py-2 px-4 text-sm font-semibold"
+          <div className="flex items-center gap-3">
+            <Link
+              href="/onboarding/profil"
+              className="rounded-lg bg-[var(--color-primary)] hover:opacity-90 transition py-2 px-4 text-sm font-semibold"
             >
-              Se déconnecter
-            </button>
-          </form>
+              Modifier mon profil
+            </Link>
+            <form action={logout}>
+              <button
+                type="submit"
+                className="rounded-lg bg-white/10 hover:bg-white/20 transition py-2 px-4 text-sm font-semibold"
+              >
+                Se déconnecter
+              </button>
+            </form>
+          </div>
         </div>
 
         {/* Cartes principales */}
