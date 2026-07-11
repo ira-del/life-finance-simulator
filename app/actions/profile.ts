@@ -3,6 +3,12 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
+// Petite fonction utilitaire : convertit en nombre, jamais NaN
+function toNumber(value: FormDataEntryValue | null): number {
+  const n = Number(value);
+  return isNaN(n) ? 0 : n;
+}
+
 // Sauvegarde l'étape 1 : profil général
 export async function saveGeneralProfile(formData: FormData) {
   const supabase = await createClient();
@@ -15,7 +21,7 @@ export async function saveGeneralProfile(formData: FormData) {
     redirect("/login");
   }
 
-  const age = Number(formData.get("age"));
+  const age = toNumber(formData.get("age"));
   const province = formData.get("province") as string;
   const statut_immigration = formData.get("statut_immigration") as string;
   const situation_familiale = formData.get("situation_familiale") as string;
@@ -53,16 +59,21 @@ export async function saveFinancialProfile(formData: FormData) {
     redirect("/login");
   }
 
-  const salaire_mensuel = Number(formData.get("salaire_mensuel")) || 0;
-  const autres_revenus = Number(formData.get("autres_revenus")) || 0;
-  const depenses_mensuelles = Number(formData.get("depenses_mensuelles")) || 0;
-  const epargne_actuelle = Number(formData.get("epargne_actuelle")) || 0;
-  const dettes = Number(formData.get("dettes")) || 0;
-  const taux_interet_dettes = Number(formData.get("taux_interet_dettes")) || 0;
-  const montant_investi_mensuel = Number(formData.get("montant_investi_mensuel")) || 0;
-  const rendement_annuel_estime = Number(formData.get("rendement_annuel_estime")) || 0;
-  const objectif_financier = formData.get("objectif_financier") as string;
-  const montant_objectif = Number(formData.get("montant_objectif")) || null;
+  const salaire_mensuel = toNumber(formData.get("salaire_mensuel"));
+  const autres_revenus = toNumber(formData.get("autres_revenus"));
+  const depenses_mensuelles = toNumber(formData.get("depenses_mensuelles"));
+  const epargne_actuelle = toNumber(formData.get("epargne_actuelle"));
+  const montant_epargne_mensuel = toNumber(formData.get("montant_epargne_mensuel"));
+  const frequence_epargne = (formData.get("frequence_epargne") as string) || "mensuel";
+  const dettes = toNumber(formData.get("dettes"));
+  const taux_interet_dettes = toNumber(formData.get("taux_interet_dettes"));
+  const montant_paiement_dettes = toNumber(formData.get("montant_paiement_dettes"));
+  const frequence_paiement_dettes =
+    (formData.get("frequence_paiement_dettes") as string) || "mensuel";
+  const montant_investi_mensuel = toNumber(formData.get("montant_investi_mensuel"));
+  const rendement_annuel_estime = toNumber(formData.get("rendement_annuel_estime"));
+  const objectif_financier = (formData.get("objectif_financier") as string) || null;
+  const montant_objectif = toNumber(formData.get("montant_objectif"));
 
   const { error } = await supabase.from("financial_profiles").upsert(
     {
@@ -71,8 +82,12 @@ export async function saveFinancialProfile(formData: FormData) {
       autres_revenus,
       depenses_mensuelles,
       epargne_actuelle,
+      montant_epargne_mensuel,
+      frequence_epargne,
       dettes,
       taux_interet_dettes,
+      montant_paiement_dettes,
+      frequence_paiement_dettes,
       montant_investi_mensuel,
       rendement_annuel_estime,
       objectif_financier,

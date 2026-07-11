@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { logout } from "@/app/actions/auth";
+import NetWorthChart from "@/components/charts/NetWorthChart";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -46,13 +47,28 @@ export default async function DashboardPage() {
 
   const patrimoineNet = epargne - dettes;
   const soldeMensuel = revenuMensuelTotal - depenses - investiMensuel;
+const epargneReelleMensuelle =
+    Number(finances.montant_epargne_mensuel) || 0;
+  const montantMisDeCote =
+    epargneReelleMensuelle + investiMensuel + (Number(finances.montant_paiement_dettes) || 0);
   const tauxEpargne =
     revenuMensuelTotal > 0
-      ? Math.round(
-          ((revenuMensuelTotal - depenses) / revenuMensuelTotal) * 100
-        )
+      ? Math.round((montantMisDeCote / revenuMensuelTotal) * 100)
       : 0;
-
+const financialInputs = {
+    epargne_actuelle: epargne,
+    montant_epargne_mensuel: Number(finances.montant_epargne_mensuel) || 0,
+    frequence_epargne: finances.frequence_epargne || "mensuel",
+    dettes: dettes,
+    taux_interet_dettes: Number(finances.taux_interet_dettes),
+    montant_paiement_dettes: Number(finances.montant_paiement_dettes) || 0,
+    frequence_paiement_dettes: finances.frequence_paiement_dettes || "mensuel",
+    montant_investi_mensuel: investiMensuel,
+    rendement_annuel_estime: Number(finances.rendement_annuel_estime),
+    salaire_mensuel: Number(finances.salaire_mensuel),
+    autres_revenus: Number(finances.autres_revenus),
+    depenses_mensuelles: depenses,
+  };
   // Progression vers l'objectif financier
   const montantObjectif = Number(finances.montant_objectif) || 0;
   const progressionObjectif =
@@ -164,7 +180,69 @@ export default async function DashboardPage() {
             {formatMoney(soldeMensuel)}
           </p>
         </div>
+{/* Graphique d'évolution du patrimoine */}
+        <div className="mb-8">
+          <NetWorthChart inputs={financialInputs} />
 
+ <details className="glass rounded-2xl p-6 mt-4">
+            <summary className="cursor-pointer text-sm font-semibold text-[var(--color-primary)]">
+              Comment ce graphique est-il calculé ?
+            </summary>
+            <div className="mt-4 text-sm text-[var(--color-text-secondary)] space-y-4">
+              <p>
+                Cette projection suppose que ta situation actuelle (salaire, dépenses,
+                épargne, investissements) reste la même chaque année, sans changement.
+                C&apos;est un point de départ pour voir où tu en serais en continuant comme
+                aujourd&apos;hui — pas une garantie, juste une estimation.
+              </p>
+
+              <div>
+                <p className="font-semibold text-[var(--color-text-primary)] mb-1">
+                  Que représente chaque courbe ?
+                </p>
+                <ul className="space-y-2">
+                  <li>
+                    <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#06b6d4] mr-2" />
+                    <span className="font-medium text-[var(--color-text-primary)]">Épargne</span> —
+                    l&apos;argent que tu mets de côté régulièrement dans un compte classique
+                    (celui que tu as renseigné dans &quot;Épargne régulière&quot;), sans
+                    rendement. C&apos;est de l&apos;argent facilement accessible, en sécurité.
+                  </li>
+                  <li>
+                    <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#a855f7] mr-2" />
+                    <span className="font-medium text-[var(--color-text-primary)]">
+                      Investissements
+                    </span>{" "}
+                    — l&apos;argent que tu places chaque mois (CELI, REER, actions...) et qui
+                    croît avec le rendement annuel que tu as estimé. C&apos;est pour ça que
+                    cette courbe peut monter plus vite avec le temps : les gains génèrent
+                    eux-mêmes des gains (intérêts composés).
+                  </li>
+                  <li>
+                    <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#ef4444] mr-2" />
+                    <span className="font-medium text-[var(--color-text-primary)]">Dettes</span> —
+                    ce qu&apos;il te reste à rembourser, basé sur ton paiement réel et le taux
+                    d&apos;intérêt renseignés. Cette courbe diminue jusqu&apos;à atteindre 0.
+                  </li>
+                  <li>
+                    <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#6366f1] mr-2" />
+                    <span className="font-medium text-[var(--color-text-primary)]">
+                      Valeur nette
+                    </span>{" "}
+                    — la somme de tout ce que tu possèdes (épargne + investissements) moins
+                    ce que tu dois (dettes restantes). C&apos;est la mesure globale de ta
+                    situation financière.
+                  </li>
+                </ul>
+              </div>
+
+              <p className="text-xs opacity-70">
+                Ces calculs sont fournis à titre informatif seulement et ne remplacent pas
+                les conseils d&apos;un(e) planificateur(-trice) financier(-ère) agréé(e).
+              </p>
+            </div>
+          </details>
+        </div>
         {/* Objectif financier */}
         {finances.objectif_financier && (
           <div className="glass rounded-2xl p-6">
