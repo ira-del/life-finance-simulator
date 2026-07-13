@@ -3,28 +3,28 @@ import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
 import HtmlLangSetter from "@/components/layout/HtmlLangSetter";
 
 export const metadata = {
-  title: "Mentions légales",
-  description: "Informations légales concernant Assistant Vie Canada.",
+  title: "Legal Notice",
+  description: "Legal information about Assistant Vie Canada.",
   alternates: {
-    canonical: "/mentions-legales",
+    canonical: "/en/legal-notice",
     languages: { fr: "/mentions-legales", en: "/en/legal-notice" },
   },
 };
 
-export default function MentionsLegalesPage() {
+export default function LegalNoticePageEn() {
   return (
     <main className="min-h-screen gradient-bg p-6 md:p-10">
-      <HtmlLangSetter lang="fr" />
+      <HtmlLangSetter lang="en" />
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold">Mentions légales</h1>
+          <h1 className="text-3xl font-bold">Legal Notice</h1>
           <div className="flex items-center gap-4">
-            <LanguageSwitcher locale="fr" hrefFr="/mentions-legales" hrefEn="/en/legal-notice" />
+            <LanguageSwitcher locale="en" hrefFr="/mentions-legales" hrefEn="/en/legal-notice" />
             <Link
-              href="/"
+              href="/en"
               className="link-button rounded-lg bg-white/10 hover:bg-white/20 transition py-2 px-4 text-sm font-semibold"
             >
-              ← Accueil
+              ← Home
             </Link>
           </div>
         </div>
@@ -32,33 +32,32 @@ export default function MentionsLegalesPage() {
         <div className="glass rounded-2xl p-6 md:p-8 space-y-6 text-sm text-[var(--color-text-secondary)] leading-relaxed">
           <section>
             <h2 className="text-base font-semibold text-[var(--color-text-primary)] mb-2">
-              Éditeur
+              Publisher
             </h2>
             <p>
-              Assistant Vie Canada est actuellement un projet personnel en développement, non
-              exploité par une entité juridique enregistrée. Ces informations seront mises à jour
-              lors de l&apos;incorporation officielle du service.
+              Assistant Vie Canada is currently a personal project in development, not operated by
+              a registered legal entity. This information will be updated once the service is
+              formally incorporated.
             </p>
           </section>
 
           <section>
             <h2 className="text-base font-semibold text-[var(--color-text-primary)] mb-2">
-              Hébergement
+              Hosting
             </h2>
             <p>
-              Le site est hébergé par Vercel Inc. (340 S Lemon Ave #4133, Walnut, CA 91789,
-              États-Unis). La base de données et l&apos;authentification sont fournies par
-              Supabase.
+              The site is hosted by Vercel Inc. (340 S Lemon Ave #4133, Walnut, CA 91789, United
+              States). The database and authentication are provided by Supabase.
             </p>
           </section>
 
           <section>
             <h2 className="text-base font-semibold text-[var(--color-text-primary)] mb-2">
-              Propriété intellectuelle
+              Intellectual property
             </h2>
             <p>
-              L&apos;ensemble du contenu, du design et du code d&apos;Assistant Vie Canada est
-              protégé et ne peut être reproduit sans autorisation.
+              All content, design, and code of Assistant Vie Canada is protected and may not be
+              reproduced without authorization.
             </p>
           </section>
 
@@ -67,18 +66,18 @@ export default function MentionsLegalesPage() {
               Contact
             </h2>
             <p>
-              Pour toute question, écris à{" "}
+              For any question, email{" "}
               <a
                 href="mailto:contact@assistantvie.com"
                 className="text-[var(--color-secondary)] hover:underline"
               >
                 contact@assistantvie.com
               </a>{" "}
-              ou consulte notre page{" "}
-              <Link href="/contact" className="text-[var(--color-secondary)] hover:underline">
+              or visit our{" "}
+              <Link href="/en/contact" className="text-[var(--color-secondary)] hover:underline">
                 Contact
-              </Link>
-              .
+              </Link>{" "}
+              page.
             </p>
           </section>
         </div>

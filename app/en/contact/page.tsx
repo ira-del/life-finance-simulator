@@ -4,39 +4,39 @@ import HtmlLangSetter from "@/components/layout/HtmlLangSetter";
 
 export const metadata = {
   title: "Contact",
-  description: "Contacte l'équipe d'Assistant Vie Canada.",
-  alternates: { canonical: "/contact", languages: { fr: "/contact", en: "/en/contact" } },
+  description: "Contact the Assistant Vie Canada team.",
+  alternates: { canonical: "/en/contact", languages: { fr: "/contact", en: "/en/contact" } },
 };
 
-export default function ContactPage() {
+export default function ContactPageEn() {
   return (
     <main className="min-h-screen gradient-bg p-6 md:p-10">
-      <HtmlLangSetter lang="fr" />
+      <HtmlLangSetter lang="en" />
       <div className="max-w-2xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold">Contact</h1>
           <div className="flex items-center gap-4">
-            <LanguageSwitcher locale="fr" hrefFr="/contact" hrefEn="/en/contact" />
+            <LanguageSwitcher locale="en" hrefFr="/contact" hrefEn="/en/contact" />
             <Link
-              href="/"
+              href="/en"
               className="link-button rounded-lg bg-white/10 hover:bg-white/20 transition py-2 px-4 text-sm font-semibold"
             >
-              ← Accueil
+              ← Home
             </Link>
           </div>
         </div>
 
         <div className="glass rounded-2xl p-6 md:p-8 space-y-6">
           <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-            Une question, un problème, une suggestion ? Écris-nous à{" "}
+            A question, an issue, a suggestion? Email us at{" "}
             <a
               href="mailto:contact@assistantvie.com"
               className="text-[var(--color-secondary)] hover:underline font-semibold"
             >
               contact@assistantvie.com
             </a>
-            . La majorité des questions courantes trouvent aussi leur réponse dans notre{" "}
-            <Link href="/faq" className="text-[var(--color-secondary)] hover:underline">
+            . Most common questions are also answered in our{" "}
+            <Link href="/en/faq" className="text-[var(--color-secondary)] hover:underline">
               FAQ
             </Link>
             .
@@ -44,21 +44,21 @@ export default function ContactPage() {
 
           <div className="border-t border-white/10 pt-6">
             <p className="text-sm font-semibold text-[var(--color-primary)] mb-1">
-              Délai de réponse habituel
+              Typical response time
             </p>
-            <p className="text-sm text-[var(--color-text-secondary)]">48 heures ouvrables.</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">48 business hours.</p>
           </div>
 
           <div className="border-t border-white/10 pt-6">
             <p className="text-sm font-semibold text-[var(--color-primary)] mb-1">
-              Question sur tes données ?
+              Question about your data?
             </p>
             <p className="text-sm text-[var(--color-text-secondary)]">
-              Rendez-vous sur la page{" "}
+              Head to the{" "}
               <Link href="/mes-donnees" className="text-[var(--color-secondary)] hover:underline">
-                Mes données
+                My Data
               </Link>{" "}
-              pour les consulter, les télécharger ou les supprimer directement.
+              page to view, download, or delete it directly.
             </p>
           </div>
         </div>

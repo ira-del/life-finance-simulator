@@ -1,23 +1,32 @@
 import Link from "next/link";
+import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
+import HtmlLangSetter from "@/components/layout/HtmlLangSetter";
 
 export const metadata = {
   title: "Politique de confidentialité",
   description: "Comment Assistant Vie Canada collecte, utilise et protège tes données personnelles.",
-  alternates: { canonical: "/confidentialite" },
+  alternates: {
+    canonical: "/confidentialite",
+    languages: { fr: "/confidentialite", en: "/en/privacy-policy" },
+  },
 };
 
 export default function ConfidentialitePage() {
   return (
     <main className="min-h-screen gradient-bg p-6 md:p-10">
+      <HtmlLangSetter lang="fr" />
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold">Politique de confidentialité</h1>
-          <Link
-            href="/"
-            className="link-button rounded-lg bg-white/10 hover:bg-white/20 transition py-2 px-4 text-sm font-semibold"
-          >
-            ← Accueil
-          </Link>
+          <div className="flex items-center gap-4">
+            <LanguageSwitcher locale="fr" hrefFr="/confidentialite" hrefEn="/en/privacy-policy" />
+            <Link
+              href="/"
+              className="link-button rounded-lg bg-white/10 hover:bg-white/20 transition py-2 px-4 text-sm font-semibold"
+            >
+              ← Accueil
+            </Link>
+          </div>
         </div>
 
         <div className="glass rounded-2xl p-6 md:p-8 space-y-6 text-sm text-[var(--color-text-secondary)] leading-relaxed">
@@ -58,8 +67,10 @@ export default function ConfidentialitePage() {
               authentification) et le site est déployé sur <strong>Vercel</strong>. Lorsque tu
               utilises une fonctionnalité IA (conseiller, assistant, opportunités, immigration), le
               contenu pertinent est envoyé à <strong>Anthropic</strong> (fournisseur du modèle
-              d&apos;intelligence artificielle) pour générer une réponse. Aucune de ces données
-              n&apos;est vendue à des tiers ni utilisée à des fins publicitaires.
+              d&apos;intelligence artificielle) pour générer une réponse. Si tu acceptes les cookies
+              de mesure d&apos;audience, des données de navigation anonymisées sont envoyées à{" "}
+              <strong>Google Analytics</strong>. Aucune de ces données n&apos;est vendue à des
+              tiers ni utilisée à des fins publicitaires.
             </p>
           </section>
 
@@ -81,9 +92,10 @@ export default function ConfidentialitePage() {
               Cookies
             </h2>
             <p>
-              Nous utilisons uniquement des cookies essentiels au fonctionnement du site (maintenir
-              ta session de connexion). Aucun cookie de suivi publicitaire ou d&apos;analyse tierce
-              n&apos;est utilisé.
+              Nous utilisons des cookies essentiels au fonctionnement du site (maintenir ta session
+              de connexion), ainsi que des cookies optionnels de mesure d&apos;audience (Google
+              Analytics) qui ne se chargent qu&apos;après ton acceptation dans la bannière de
+              consentement. Aucun cookie publicitaire n&apos;est utilisé.
             </p>
           </section>
 

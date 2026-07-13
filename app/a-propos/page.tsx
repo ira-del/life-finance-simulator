@@ -1,23 +1,29 @@
 import Link from "next/link";
+import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
+import HtmlLangSetter from "@/components/layout/HtmlLangSetter";
 
 export const metadata = {
   title: "À propos",
   description: "La mission et les fonctionnalités d'Assistant Vie Canada.",
-  alternates: { canonical: "/a-propos" },
+  alternates: { canonical: "/a-propos", languages: { fr: "/a-propos", en: "/en/about" } },
 };
 
 export default function AProposPage() {
   return (
     <main className="min-h-screen gradient-bg p-6 md:p-10">
+      <HtmlLangSetter lang="fr" />
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold">À propos</h1>
-          <Link
-            href="/"
-            className="link-button rounded-lg bg-white/10 hover:bg-white/20 transition py-2 px-4 text-sm font-semibold"
-          >
-            ← Accueil
-          </Link>
+          <div className="flex items-center gap-4">
+            <LanguageSwitcher locale="fr" hrefFr="/a-propos" hrefEn="/en/about" />
+            <Link
+              href="/"
+              className="link-button rounded-lg bg-white/10 hover:bg-white/20 transition py-2 px-4 text-sm font-semibold"
+            >
+              ← Accueil
+            </Link>
+          </div>
         </div>
 
         <div className="glass rounded-2xl p-6 md:p-8 space-y-8">

@@ -1,10 +1,12 @@
 import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
+import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
+import HtmlLangSetter from "@/components/layout/HtmlLangSetter";
 
 export const metadata = {
   title: "FAQ",
   description: "Réponses aux questions fréquentes sur Assistant Vie Canada.",
-  alternates: { canonical: "/faq" },
+  alternates: { canonical: "/faq", languages: { fr: "/faq", en: "/en/faq" } },
 };
 
 const QUESTIONS = [
@@ -50,16 +52,20 @@ export default function FaqPage() {
 
   return (
     <main className="min-h-screen gradient-bg p-6 md:p-10">
+      <HtmlLangSetter lang="fr" />
       <JsonLd data={jsonLd} />
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold">Questions fréquentes</h1>
-          <Link
-            href="/"
-            className="link-button rounded-lg bg-white/10 hover:bg-white/20 transition py-2 px-4 text-sm font-semibold"
-          >
-            ← Accueil
-          </Link>
+          <div className="flex items-center gap-4">
+            <LanguageSwitcher locale="fr" hrefFr="/faq" hrefEn="/en/faq" />
+            <Link
+              href="/"
+              className="link-button rounded-lg bg-white/10 hover:bg-white/20 transition py-2 px-4 text-sm font-semibold"
+            >
+              ← Accueil
+            </Link>
+          </div>
         </div>
 
         <div className="space-y-3">

@@ -1,23 +1,36 @@
 import Link from "next/link";
+import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
+import HtmlLangSetter from "@/components/layout/HtmlLangSetter";
 
 export const metadata = {
   title: "Conditions d'utilisation",
   description: "Les règles d'utilisation d'Assistant Vie Canada.",
-  alternates: { canonical: "/conditions-utilisation" },
+  alternates: {
+    canonical: "/conditions-utilisation",
+    languages: { fr: "/conditions-utilisation", en: "/en/terms-of-service" },
+  },
 };
 
 export default function ConditionsUtilisationPage() {
   return (
     <main className="min-h-screen gradient-bg p-6 md:p-10">
+      <HtmlLangSetter lang="fr" />
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold">Conditions d&apos;utilisation</h1>
-          <Link
-            href="/"
-            className="link-button rounded-lg bg-white/10 hover:bg-white/20 transition py-2 px-4 text-sm font-semibold"
-          >
-            ← Accueil
-          </Link>
+          <div className="flex items-center gap-4">
+            <LanguageSwitcher
+              locale="fr"
+              hrefFr="/conditions-utilisation"
+              hrefEn="/en/terms-of-service"
+            />
+            <Link
+              href="/"
+              className="link-button rounded-lg bg-white/10 hover:bg-white/20 transition py-2 px-4 text-sm font-semibold"
+            >
+              ← Accueil
+            </Link>
+          </div>
         </div>
 
         <div className="glass rounded-2xl p-6 md:p-8 space-y-6 text-sm text-[var(--color-text-secondary)] leading-relaxed">

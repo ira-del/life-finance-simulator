@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Logo from "@/components/ui/Logo";
+import HtmlLangSetter from "@/components/layout/HtmlLangSetter";
 import JsonLd from "@/components/seo/JsonLd";
 import { getAllPosts, getPostBySlug, formatDateArticle } from "@/lib/blog/posts";
 
@@ -45,6 +46,7 @@ export default async function ArticlePage({
 
   return (
     <main className="min-h-screen gradient-bg">
+      <HtmlLangSetter lang="fr" />
       <JsonLd data={jsonLd} />
       <div className="max-w-2xl mx-auto px-6 md:px-10">
         <header className="flex items-center justify-between py-6">

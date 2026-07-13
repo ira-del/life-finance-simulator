@@ -1,12 +1,13 @@
 import Link from "next/link";
 import SiteHeader from "@/components/layout/SiteHeader";
+import HtmlLangSetter from "@/components/layout/HtmlLangSetter";
 import { getAllPosts, CATEGORIES, formatDateArticle } from "@/lib/blog/posts";
 
 export const metadata = {
   title: "Blog",
   description:
     "Conseils et explications sur les finances, l'immigration, les études, l'emploi et plus, au Canada.",
-  alternates: { canonical: "/blog" },
+  alternates: { canonical: "/blog", languages: { fr: "/blog", en: "/en/blog" } },
 };
 
 export default async function BlogPage({
@@ -22,7 +23,8 @@ export default async function BlogPage({
 
   return (
     <main className="min-h-screen gradient-bg pt-[var(--header-height)]">
-      <SiteHeader />
+      <HtmlLangSetter lang="fr" />
+      <SiteHeader locale="fr" hrefFr="/blog" hrefEn="/en/blog" />
       <div className="max-w-4xl mx-auto px-6 md:px-10">
         <section className="text-center py-10 md:py-16">
           <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">Blog</h1>

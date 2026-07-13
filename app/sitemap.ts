@@ -15,6 +15,15 @@ const PAGES_PUBLIQUES = [
   "/mentions-legales",
   "/login",
   "/register",
+  "/en",
+  "/en/features",
+  "/en/blog",
+  "/en/about",
+  "/en/faq",
+  "/en/contact",
+  "/en/privacy-policy",
+  "/en/terms-of-service",
+  "/en/legal-notice",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
