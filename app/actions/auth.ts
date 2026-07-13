@@ -3,6 +3,8 @@
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
+import { verifierLimiteAuth, enregistrerTentativeAuth } from "@/lib/auth/rateLimit";
+import { enregistrerActivite } from "@/lib/auth/activityLog";
 
 // Reconstruit l'origine du site (protocole + hôte) à partir des en-têtes de
 // la requête — fonctionne aussi bien en local qu'une fois déployé, sans
@@ -22,14 +24,29 @@ export async function login(formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
-  const { error } = await supabase.auth.signInWithPassword({
+  const autorise = await verifierLimiteAuth(supabase, email, "login");
+  if (!autorise) {
+    redirect(
+      `/login?error=${encodeURIComponent(
+        "Trop de tentatives de connexion. Réessaie dans quelques minutes."
+      )}`
+    );
+  }
+
+  const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
   });
 
+  await enregistrerTentativeAuth(supabase, email, "login", !error);
+
   if (error) {
     // Pour l'instant on redirige simplement vers la page de login avec une erreur en query
     redirect(`/login?error=${encodeURIComponent(error.message)}`);
+  }
+
+  if (data.user) {
+    await enregistrerActivite(supabase, data.user.id, "connexion");
   }
 
   redirect("/dashboard");
@@ -42,21 +59,42 @@ export async function signup(formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
-  const { error } = await supabase.auth.signUp({
+  const autorise = await verifierLimiteAuth(supabase, email, "signup");
+  if (!autorise) {
+    redirect(
+      `/register?error=${encodeURIComponent(
+        "Trop de tentatives d'inscription. Réessaie plus tard."
+      )}`
+    );
+  }
+
+  const { data, error } = await supabase.auth.signUp({
     email,
     password,
   });
+
+  await enregistrerTentativeAuth(supabase, email, "signup", !error);
 
   if (error) {
     redirect(`/register?error=${encodeURIComponent(error.message)}`);
   }
 
+  if (data.user) {
+    await enregistrerActivite(supabase, data.user.id, "inscription");
+  }
+
   redirect("/dashboard");
 }
 
-// Fonction pour se déconnecter (on l'utilisera plus tard)
+// Fonction pour se déconnecter
 export async function logout() {
   const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (user) {
+    await enregistrerActivite(supabase, user.id, "deconnexion");
+  }
   await supabase.auth.signOut();
   redirect("/login");
 }
@@ -87,6 +125,13 @@ export async function updatePassword(formData: FormData) {
 
   if (error) {
     redirect(`/reset-password?error=${encodeURIComponent(error.message)}`);
+  }
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (user) {
+    await enregistrerActivite(supabase, user.id, "mot_de_passe_modifie");
   }
 
   redirect("/dashboard");

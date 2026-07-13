@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import ImmigrationDiagnosisView from "@/components/immigration/ImmigrationDiagnosisView";
+import InactivityLogout from "@/components/security/InactivityLogout";
 
 export default async function ImmigrationPage() {
   const supabase = await createClient();
@@ -16,6 +17,7 @@ export default async function ImmigrationPage() {
 
   return (
     <main className="min-h-screen gradient-bg p-6 md:p-10">
+      <InactivityLogout />
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>

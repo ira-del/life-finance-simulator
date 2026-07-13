@@ -83,9 +83,16 @@ export default function HeaderMenu({
             </Link>
           )}
           <Link
-            href="/onboarding/profil"
+            href="/securite"
             onClick={() => setOpen(false)}
             className="block px-4 py-2.5 text-sm cursor-pointer hover:bg-white/10 active:bg-white/20 transition border-t border-white/10"
+          >
+            Sécurité
+          </Link>
+          <Link
+            href="/onboarding/profil"
+            onClick={() => setOpen(false)}
+            className="block px-4 py-2.5 text-sm cursor-pointer hover:bg-white/10 active:bg-white/20 transition"
           >
             Modifier mon profil
           </Link>

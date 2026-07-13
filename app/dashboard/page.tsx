@@ -8,6 +8,7 @@ import HealthScoreCard from "@/components/dashboard/HealthScoreCard";
 import { generateSmartAlerts } from "@/lib/finance/generateSmartAlerts";
 import SmartAlerts from "@/components/dashboard/SmartAlerts";
 import HeaderMenu from "@/components/dashboard/HeaderMenu";
+import InactivityLogout from "@/components/security/InactivityLogout";
 export default async function DashboardPage() {
   const supabase = await createClient();
 
@@ -148,6 +149,7 @@ const healthScore = calculateHealthScore({
 
   return (
     <main className="min-h-screen gradient-bg p-6 md:p-10">
+      <InactivityLogout />
       <div className="max-w-5xl mx-auto">
         {/* En-tête */}
 <div className="flex items-center justify-between mb-8">

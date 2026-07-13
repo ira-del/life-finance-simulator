@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { enregistrerActivite } from "@/lib/auth/activityLog";
 
 // Petite fonction utilitaire : convertit en nombre, jamais NaN
 function toNumber(value: FormDataEntryValue | null): number {
@@ -45,6 +46,8 @@ export async function saveGeneralProfile(formData: FormData) {
   if (error) {
     redirect(`/onboarding/profil?error=${encodeURIComponent(error.message)}`);
   }
+
+  await enregistrerActivite(supabase, user!.id, "profil_modifie");
 
   redirect("/onboarding/finances");
 }
@@ -119,6 +122,8 @@ export async function saveFinancialProfile(formData: FormData) {
   if (error) {
     redirect(`/onboarding/finances?error=${encodeURIComponent(error.message)}`);
   }
+
+  await enregistrerActivite(supabase, user!.id, "finances_modifiees");
 
   redirect("/dashboard");
 }

@@ -8,6 +8,7 @@ import BadgesShelf from "@/components/dashboard/BadgesShelf";
 import AdvisorSummary from "@/components/dashboard/AdvisorSummary";
 import { getProfileInsights } from "@/lib/finance/profileInsights";
 import HistoryChart from "@/components/progression/HistoryChart";
+import InactivityLogout from "@/components/security/InactivityLogout";
 
 export default async function ProgressionPage() {
   const supabase = await createClient();
@@ -97,6 +98,7 @@ export default async function ProgressionPage() {
 
   return (
     <main className="min-h-screen gradient-bg p-6 md:p-10">
+      <InactivityLogout />
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>

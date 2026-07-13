@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import OpportunitiesList from "@/components/opportunites/OpportunitiesList";
+import InactivityLogout from "@/components/security/InactivityLogout";
 
 export default async function OpportunitesPage() {
   const supabase = await createClient();
@@ -16,6 +17,7 @@ export default async function OpportunitesPage() {
 
   return (
     <main className="min-h-screen gradient-bg p-6 md:p-10">
+      <InactivityLogout />
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>

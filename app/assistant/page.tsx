@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import AssistantChat from "@/components/assistant/AssistantChat";
 import type { ChatMessage } from "@/app/actions/assistant";
+import InactivityLogout from "@/components/security/InactivityLogout";
 
 export default async function AssistantPage() {
   const supabase = await createClient();
@@ -36,6 +37,7 @@ export default async function AssistantPage() {
 
   return (
     <main className="min-h-screen gradient-bg p-6 md:p-10">
+      <InactivityLogout />
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
