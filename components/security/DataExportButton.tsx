@@ -3,10 +3,12 @@
 import { useState, useTransition } from "react";
 import { exportUserData } from "@/app/actions/dataPrivacy";
 import { buildDataExportPdf } from "@/lib/security/buildDataExportPdf";
+import { useToast } from "@/components/ui/ToastProvider";
 
 export default function DataExportButton() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const { showToast } = useToast();
 
   function handleExport() {
     setError(null);
@@ -14,10 +16,12 @@ export default function DataExportButton() {
       const result = await exportUserData();
       if (!result.ok) {
         setError("Impossible de générer l'export pour le moment. Réessaie dans un instant.");
+        showToast("Échec de l'export de tes données.", "error");
         return;
       }
       const doc = buildDataExportPdf(result.data);
       doc.save(`mes-donnees-${new Date().toISOString().slice(0, 10)}.pdf`);
+      showToast("Tes données ont été téléchargées.", "success");
     });
   }
 

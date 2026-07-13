@@ -1,15 +1,13 @@
 import Link from "next/link";
 
-export const metadata = { title: "Compte supprimé" };
-
-export default function CompteSupprimePage() {
+export default function NotFound() {
   return (
     <main className="min-h-screen gradient-bg flex items-center justify-center p-6">
       <div className="glass rounded-2xl p-10 max-w-md w-full text-center">
-        <h1 className="text-3xl font-bold mb-2">Compte supprimé</h1>
+        <p className="text-6xl font-bold text-[var(--color-primary)] mb-4">404</p>
+        <h1 className="text-2xl font-bold mb-2">Page introuvable</h1>
         <p className="text-[var(--color-text-secondary)] mb-8">
-          Ton compte et toutes tes données ont été définitivement supprimés. Merci d&apos;avoir
-          essayé Assistant Vie Canada.
+          La page que tu cherches n&apos;existe pas ou a été déplacée.
         </p>
         <Link
           href="/"

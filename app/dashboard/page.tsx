@@ -9,6 +9,9 @@ import { generateSmartAlerts } from "@/lib/finance/generateSmartAlerts";
 import SmartAlerts from "@/components/dashboard/SmartAlerts";
 import HeaderMenu from "@/components/dashboard/HeaderMenu";
 import InactivityLogout from "@/components/security/InactivityLogout";
+
+export const metadata = { title: "Tableau de bord" };
+
 export default async function DashboardPage() {
   const supabase = await createClient();
 

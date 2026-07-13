@@ -5,6 +5,8 @@ import DataExportButton from "@/components/security/DataExportButton";
 import DeleteAccountButton from "@/components/security/DeleteAccountButton";
 import InactivityLogout from "@/components/security/InactivityLogout";
 
+export const metadata = { title: "Mes données" };
+
 export default async function MesDonneesPage() {
   const supabase = await createClient();
 

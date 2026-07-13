@@ -10,6 +10,8 @@ import { getProfileInsights } from "@/lib/finance/profileInsights";
 import HistoryChart from "@/components/progression/HistoryChart";
 import InactivityLogout from "@/components/security/InactivityLogout";
 
+export const metadata = { title: "Ma progression" };
+
 export default async function ProgressionPage() {
   const supabase = await createClient();
 

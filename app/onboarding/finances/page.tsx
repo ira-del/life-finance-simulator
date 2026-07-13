@@ -1,6 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import OnboardingFinancesClient from "./FinancesForm";
 
+export const metadata = { title: "Ta situation financière" };
+
 export default async function OnboardingFinancesPage() {
   const supabase = await createClient();
   const {

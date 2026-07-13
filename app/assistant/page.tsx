@@ -5,6 +5,8 @@ import AssistantChat from "@/components/assistant/AssistantChat";
 import type { ChatMessage } from "@/app/actions/assistant";
 import InactivityLogout from "@/components/security/InactivityLogout";
 
+export const metadata = { title: "Assistant IA" };
+
 export default async function AssistantPage() {
   const supabase = await createClient();
 

@@ -90,6 +90,13 @@ export default function HeaderMenu({
             Sécurité
           </Link>
           <Link
+            href="/faq"
+            onClick={() => setOpen(false)}
+            className="block px-4 py-2.5 text-sm cursor-pointer hover:bg-white/10 active:bg-white/20 transition"
+          >
+            Aide
+          </Link>
+          <Link
             href="/onboarding/profil"
             onClick={() => setOpen(false)}
             className="block px-4 py-2.5 text-sm cursor-pointer hover:bg-white/10 active:bg-white/20 transition"

@@ -4,6 +4,8 @@ import { createClient } from "@/lib/supabase/server";
 import { calculateSecurityScore } from "@/lib/security/calculateSecurityScore";
 import InactivityLogout from "@/components/security/InactivityLogout";
 
+export const metadata = { title: "Sécurité" };
+
 const LABELS_ACTIVITE: Record<string, string> = {
   connexion: "Connexion réussie",
   inscription: "Compte créé",

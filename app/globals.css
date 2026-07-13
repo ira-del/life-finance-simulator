@@ -69,3 +69,11 @@ a.link-button:active {
 button.menu-item-button:active {
   transform: none;
 }
+
+/* Anneau de focus visible et cohérent pour la navigation au clavier — le
+   style par défaut du navigateur est souvent peu visible sur fond sombre. */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

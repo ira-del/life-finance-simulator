@@ -2,6 +2,8 @@ import { createClient } from "@/lib/supabase/server";
 import { saveGeneralProfile } from "@/app/actions/profile";
 import OnboardingStepper from "@/components/onboarding/OnboardingStepper";
 
+export const metadata = { title: "Ton profil" };
+
 export default async function OnboardingProfilePage() {
   const supabase = await createClient();
   const {

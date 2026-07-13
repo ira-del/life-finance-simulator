@@ -2,6 +2,8 @@ import Link from "next/link";
 import { login } from "@/app/actions/auth";
 import PasswordInput from "@/components/ui/PasswordInput";
 
+export const metadata = { title: "Connexion" };
+
 export default async function LoginPage({
   searchParams,
 }: {

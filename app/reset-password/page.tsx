@@ -3,6 +3,8 @@ import { createClient } from "@/lib/supabase/server";
 import { updatePassword } from "@/app/actions/auth";
 import PasswordInput from "@/components/ui/PasswordInput";
 
+export const metadata = { title: "Nouveau mot de passe" };
+
 export default async function ResetPasswordPage({
   searchParams,
 }: {

@@ -4,6 +4,8 @@ import { createClient } from "@/lib/supabase/server";
 import OpportunitiesList from "@/components/opportunites/OpportunitiesList";
 import InactivityLogout from "@/components/security/InactivityLogout";
 
+export const metadata = { title: "Opportunités" };
+
 export default async function OpportunitesPage() {
   const supabase = await createClient();
 

@@ -2,6 +2,8 @@ import Link from "next/link";
 import { signup } from "@/app/actions/auth";
 import PasswordInput from "@/components/ui/PasswordInput";
 
+export const metadata = { title: "Créer un compte" };
+
 export default async function RegisterPage({
   searchParams,
 }: {

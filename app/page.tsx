@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import Logo from "@/components/ui/Logo";
 
 const FONCTIONNALITES = [
   {
@@ -51,7 +52,7 @@ export default async function Home() {
       <div className="max-w-6xl mx-auto px-6 md:px-10">
         {/* Header */}
         <header className="flex items-center justify-between py-6">
-          <p className="text-lg font-bold">Assistant Vie Canada</p>
+          <Logo />
           <div className="flex items-center gap-3">
             <Link
               href="/login"
@@ -111,14 +112,12 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="py-10 text-center text-xs text-[var(--color-text-secondary)] opacity-70">
-          <p>
-            Assistant Vie Canada fournit des informations générales à titre éducatif — ce n&apos;est
-            pas un avis professionnel (financier, juridique, fiscal ou d&apos;immigration).
-          </p>
-          <p className="mt-2">© 2026 Assistant Vie Canada</p>
-        </footer>
+        {/* Avertissement — le pied de page complet (liens, copyright) est
+            partagé sur tout le site via app/layout.tsx */}
+        <p className="pb-10 text-center text-xs text-[var(--color-text-secondary)] opacity-70">
+          Assistant Vie Canada fournit des informations générales à titre éducatif — ce n&apos;est
+          pas un avis professionnel (financier, juridique, fiscal ou d&apos;immigration).
+        </p>
       </div>
     </main>
   );

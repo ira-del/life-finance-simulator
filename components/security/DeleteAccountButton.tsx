@@ -41,7 +41,11 @@ export default function DeleteAccountButton() {
         toujours. Pour confirmer, écris <span className="font-mono font-semibold">SUPPRIMER</span>{" "}
         ci-dessous.
       </p>
+      <label htmlFor="confirmation-suppression" className="sr-only">
+        Tape SUPPRIMER pour confirmer la suppression du compte
+      </label>
       <input
+        id="confirmation-suppression"
         type="text"
         value={confirmText}
         onChange={(e) => setConfirmText(e.target.value)}

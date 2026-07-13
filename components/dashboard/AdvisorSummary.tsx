@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { generateAdvisorSummary } from "@/app/actions/advisor";
 import type { ProfileInsights } from "@/lib/finance/profileInsights";
+import Skeleton from "@/components/ui/Skeleton";
 
 export default function AdvisorSummary({
   profileInsights,
@@ -101,9 +102,13 @@ export default function AdvisorSummary({
       {revealed && (
         <>
           {isPending && (
-            <p className="text-sm text-[var(--color-text-secondary)]">
-              Ton conseiller analyse ta situation...
-            </p>
+            <div className="space-y-2.5" aria-label="Ton conseiller analyse ta situation...">
+              <Skeleton className="h-3.5 w-full" />
+              <Skeleton className="h-3.5 w-11/12" />
+              <Skeleton className="h-3.5 w-4/5" />
+              <Skeleton className="h-3.5 w-full" />
+              <Skeleton className="h-3.5 w-2/3" />
+            </div>
           )}
 
           {error && <p className="text-sm text-[var(--color-danger)]">{error}</p>}

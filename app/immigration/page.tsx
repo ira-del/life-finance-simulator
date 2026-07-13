@@ -4,6 +4,8 @@ import { createClient } from "@/lib/supabase/server";
 import ImmigrationDiagnosisView from "@/components/immigration/ImmigrationDiagnosisView";
 import InactivityLogout from "@/components/security/InactivityLogout";
 
+export const metadata = { title: "Immigration" };
+
 export default async function ImmigrationPage() {
   const supabase = await createClient();
 

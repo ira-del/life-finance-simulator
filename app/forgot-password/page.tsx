@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { requestPasswordReset } from "@/app/actions/auth";
 
+export const metadata = { title: "Mot de passe oublié" };
+
 export default async function ForgotPasswordPage({
   searchParams,
 }: {

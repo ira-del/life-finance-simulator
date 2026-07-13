@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { SmartAlert } from "@/lib/finance/generateSmartAlerts";
 import { dismissSmartAlert } from "@/app/actions/alerts";
+import { useToast } from "@/components/ui/ToastProvider";
 
 export default function SmartAlerts({
   alerts,
@@ -13,6 +14,7 @@ export default function SmartAlerts({
 }) {
   const [dismissed, setDismissed] = useState<Set<string>>(new Set(dismissedIds));
   const [, startTransition] = useTransition();
+  const { showToast } = useToast();
 
   const visible = alerts.filter((a) => !dismissed.has(a.id));
   if (visible.length === 0) return null;
@@ -28,6 +30,7 @@ export default function SmartAlerts({
           next.delete(alertId);
           return next;
         });
+        showToast("Impossible d'ignorer cette suggestion pour le moment.", "error");
       }
     });
   }
