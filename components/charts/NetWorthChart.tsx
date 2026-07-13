@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
+import { Analytics } from "@/lib/analytics/events";
 import {
   ComposedChart,
   Line,
@@ -76,6 +77,13 @@ export default function NetWorthChart({ inputs }: { inputs: FinancialInputs }) {
   // de Recharts : l'état interactif interne n'est pas toujours à jour au
   // moment exact du clic).
   const pointSurvole = useRef<number | null>(null);
+
+  useEffect(() => {
+    Analytics.simulationLancee({ duree, mensuel });
+    // Ne suivre que les vrais changements de paramètres de simulation,
+    // pas chaque re-render (ex: sélection d'un point sur le graphique).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [duree, mensuel]);
 
   const data: Point[] = useMemo(() => {
     if (mensuel) {

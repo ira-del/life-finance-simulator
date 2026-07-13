@@ -49,7 +49,7 @@ export async function login(formData: FormData) {
     await enregistrerActivite(supabase, data.user.id, "connexion");
   }
 
-  redirect("/dashboard");
+  redirect("/dashboard?event=login");
 }
 
 // Fonction appelée par le formulaire d'inscription
@@ -83,7 +83,7 @@ export async function signup(formData: FormData) {
     await enregistrerActivite(supabase, data.user.id, "inscription");
   }
 
-  redirect("/dashboard");
+  redirect("/dashboard?event=signup");
 }
 
 // Fonction pour se déconnecter
@@ -96,7 +96,7 @@ export async function logout() {
     await enregistrerActivite(supabase, user.id, "deconnexion");
   }
   await supabase.auth.signOut();
-  redirect("/login");
+  redirect("/login?event=logout");
 }
 
 // Envoie l'email de réinitialisation de mot de passe

@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import Footer from "@/components/layout/Footer";
 import ToastProvider from "@/components/ui/ToastProvider";
+import GoogleAnalyticsLoader from "@/components/analytics/GoogleAnalyticsLoader";
+import CookieConsentBanner from "@/components/analytics/CookieConsentBanner";
+import EventFromQuery from "@/components/analytics/EventFromQuery";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -52,10 +56,15 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <Suspense fallback={null}>
+          <EventFromQuery />
+        </Suspense>
+        <GoogleAnalyticsLoader />
         <ToastProvider>
           {children}
           <Footer />
         </ToastProvider>
+        <CookieConsentBanner />
       </body>
     </html>
   );

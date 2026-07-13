@@ -9,6 +9,7 @@ import {
   type ChatMessage,
   type ConversationSummary,
 } from "@/app/actions/assistant";
+import { Analytics } from "@/lib/analytics/events";
 
 export default function AssistantChat({
   initialConversationId = null,
@@ -71,6 +72,7 @@ export default function AssistantChat({
         ...prev,
         { role: "assistant", content: result.reply },
       ]);
+      Analytics.questionIA();
       const fraicheListe = await listConversations();
       setConversations(fraicheListe);
     });

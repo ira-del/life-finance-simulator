@@ -80,6 +80,24 @@ export async function saveFinancialProfile(formData: FormData) {
   const objectif_financier = (formData.get("objectif_financier") as string) || null;
   const montant_objectif = toNumber(formData.get("montant_objectif"));
 
+  // Regardé avant l'upsert pour distinguer un premier remplissage (onboarding)
+  // d'une simple modification ultérieure, et détecter si l'objectif financier
+  // vient d'être ajouté ou retiré — sert uniquement à choisir quels
+  // événements analytics envoyer, aucune incidence sur l'enregistrement.
+  const { data: profilExistant } = await supabase
+    .from("financial_profiles")
+    .select("objectif_financier")
+    .eq("user_id", user!.id)
+    .maybeSingle();
+  const estOnboarding = !profilExistant;
+  const evenements: string[] = [];
+  if (estOnboarding) evenements.push("onboarding_complete");
+  if (!profilExistant?.objectif_financier && objectif_financier) {
+    evenements.push("goal_added");
+  } else if (profilExistant?.objectif_financier && !objectif_financier) {
+    evenements.push("goal_deleted");
+  }
+
   const chiffre_affaires_mensuel = toNumber(formData.get("chiffre_affaires_mensuel"));
   const benefices_mensuels = toNumber(formData.get("benefices_mensuels"));
   const taxes_a_payer_estimees = toNumber(formData.get("taxes_a_payer_estimees"));
@@ -125,5 +143,5 @@ export async function saveFinancialProfile(formData: FormData) {
 
   await enregistrerActivite(supabase, user!.id, "finances_modifiees");
 
-  redirect("/dashboard");
+  redirect(evenements.length > 0 ? `/dashboard?event=${evenements.join(",")}` : "/dashboard");
 }

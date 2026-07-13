@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { exportUserData } from "@/app/actions/dataPrivacy";
 import { buildDataExportPdf } from "@/lib/security/buildDataExportPdf";
 import { useToast } from "@/components/ui/ToastProvider";
+import { Analytics } from "@/lib/analytics/events";
 
 export default function DataExportButton() {
   const [isPending, startTransition] = useTransition();
@@ -21,6 +22,7 @@ export default function DataExportButton() {
       }
       const doc = buildDataExportPdf(result.data);
       doc.save(`mes-donnees-${new Date().toISOString().slice(0, 10)}.pdf`);
+      Analytics.exportPdf();
       showToast("Tes données ont été téléchargées.", "success");
     });
   }
