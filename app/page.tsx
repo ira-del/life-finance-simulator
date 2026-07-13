@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import Logo from "@/components/ui/Logo";
+import SiteHeader from "@/components/layout/SiteHeader";
 import JsonLd from "@/components/seo/JsonLd";
 import { FEATURES } from "@/lib/content/features";
 
@@ -45,28 +45,10 @@ export default async function Home() {
   };
 
   return (
-    <main className="min-h-screen gradient-bg">
+    <main className="min-h-screen gradient-bg pt-[var(--header-height)]">
       <JsonLd data={jsonLd} />
+      <SiteHeader />
       <div className="max-w-6xl mx-auto px-6 md:px-10">
-        {/* Header */}
-        <header className="flex items-center justify-between py-6">
-          <Logo />
-          <div className="flex items-center gap-3">
-            <Link
-              href="/login"
-              className="link-button rounded-lg bg-white/10 hover:bg-white/20 transition py-2 px-4 text-sm font-semibold"
-            >
-              Connexion
-            </Link>
-            <Link
-              href="/register"
-              className="link-button rounded-lg bg-[var(--color-primary)] hover:opacity-90 transition py-2 px-4 text-sm font-semibold"
-            >
-              S&apos;inscrire
-            </Link>
-          </div>
-        </header>
-
         {/* Hero */}
         <section className="py-16 md:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="text-center lg:text-left">
@@ -142,7 +124,7 @@ export default async function Home() {
             {FEATURES.map((f) => (
               <div key={f.slug} className="glass rounded-2xl p-6">
                 <svg
-                  className="w-8 h-8 mb-4"
+                  className="w-9 h-9 mb-4"
                   style={{ color: f.color }}
                   fill="none"
                   viewBox="0 0 24 24"

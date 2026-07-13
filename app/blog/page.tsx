@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Logo from "@/components/ui/Logo";
+import SiteHeader from "@/components/layout/SiteHeader";
 import { getAllPosts, CATEGORIES, formatDateArticle } from "@/lib/blog/posts";
 
 export const metadata = {
@@ -21,38 +21,24 @@ export default async function BlogPage({
     : tousLesArticles;
 
   return (
-    <main className="min-h-screen gradient-bg">
+    <main className="min-h-screen gradient-bg pt-[var(--header-height)]">
+      <SiteHeader />
       <div className="max-w-4xl mx-auto px-6 md:px-10">
-        <header className="flex items-center justify-between py-6">
-          <Logo />
-          <div className="flex items-center gap-3">
-            <Link
-              href="/login"
-              className="link-button rounded-lg bg-white/10 hover:bg-white/20 transition py-2 px-4 text-sm font-semibold"
-            >
-              Connexion
-            </Link>
-            <Link
-              href="/register"
-              className="link-button rounded-lg bg-[var(--color-primary)] hover:opacity-90 transition py-2 px-4 text-sm font-semibold"
-            >
-              S&apos;inscrire
-            </Link>
-          </div>
-        </header>
-
         <section className="text-center py-10 md:py-16">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">Blog</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">Blog</h1>
           <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto">
             Conseils et explications sur les finances, l&apos;immigration, les études, l&apos;emploi
             et plus, au Canada.
           </p>
         </section>
 
-        <nav aria-label="Filtrer par catégorie" className="flex flex-wrap justify-center gap-2 pb-10">
+        <nav
+          aria-label="Filtrer par catégorie"
+          className="pills-scroll flex flex-nowrap overflow-x-auto justify-start sm:justify-center gap-2.5 pb-10 px-1 -mx-1"
+        >
           <Link
             href="/blog"
-            className={`rounded-full transition py-1.5 px-4 text-xs font-medium ${
+            className={`flex-shrink-0 whitespace-nowrap rounded-full transition py-1.5 px-4 text-xs font-medium ${
               !categorie
                 ? "bg-[var(--color-primary)] text-white"
                 : "bg-white/5 hover:bg-white/10 border border-white/10 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
@@ -64,7 +50,7 @@ export default async function BlogPage({
             <Link
               key={cat}
               href={`/blog?categorie=${encodeURIComponent(cat)}`}
-              className={`rounded-full transition py-1.5 px-4 text-xs font-medium ${
+              className={`flex-shrink-0 whitespace-nowrap rounded-full transition py-1.5 px-4 text-xs font-medium ${
                 categorie === cat
                   ? "bg-[var(--color-primary)] text-white"
                   : "bg-white/5 hover:bg-white/10 border border-white/10 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
@@ -91,7 +77,7 @@ export default async function BlogPage({
                 {article.category}
               </span>
               <h2 className="font-semibold mb-2">{article.title}</h2>
-              <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-3">
+              <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-3 line-clamp-3">
                 {article.description}
               </p>
               <p className="text-xs text-[var(--color-text-secondary)] opacity-70">

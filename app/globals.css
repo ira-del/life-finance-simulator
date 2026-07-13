@@ -14,10 +14,29 @@
   --color-text-secondary: #94a3b8;
 }
 
+:root {
+  /* Hauteur réelle du SiteHeader fixe (components/layout/SiteHeader.tsx) —
+     seule source de vérité, réutilisée à la fois par le header lui-même et
+     par le padding-top du contenu qui le suit, pour qu'ils ne puissent
+     jamais se désynchroniser. */
+  --header-height: 68px;
+}
+
 body {
   background: var(--color-background);
   color: var(--color-text-primary);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* Barre de pills horizontale (catégories du blog, navigation des
+   fonctionnalités) : défilement tactile fluide sur iOS, scrollbar cachée
+   pour un rendu propre sans perdre la fonctionnalité de défilement. */
+.pills-scroll {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.pills-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 /* Effet glassmorphism réutilisable */

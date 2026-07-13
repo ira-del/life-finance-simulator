@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Logo from "@/components/ui/Logo";
+import SiteHeader from "@/components/layout/SiteHeader";
 import JsonLd from "@/components/seo/JsonLd";
 import { FEATURES } from "@/lib/content/features";
 
@@ -23,29 +23,12 @@ export default function FonctionnalitesPage() {
   };
 
   return (
-    <main className="min-h-screen gradient-bg">
+    <main className="min-h-screen gradient-bg pt-[var(--header-height)]">
       <JsonLd data={jsonLd} />
+      <SiteHeader />
       <div className="max-w-4xl mx-auto px-6 md:px-10">
-        <header className="flex items-center justify-between py-6">
-          <Logo />
-          <div className="flex items-center gap-3">
-            <Link
-              href="/login"
-              className="link-button rounded-lg bg-white/10 hover:bg-white/20 transition py-2 px-4 text-sm font-semibold"
-            >
-              Connexion
-            </Link>
-            <Link
-              href="/register"
-              className="link-button rounded-lg bg-[var(--color-primary)] hover:opacity-90 transition py-2 px-4 text-sm font-semibold"
-            >
-              S&apos;inscrire
-            </Link>
-          </div>
-        </header>
-
         <section className="text-center py-10 md:py-16">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
             Huit outils pour piloter ta vie financière
           </h1>
           <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto">
@@ -54,23 +37,24 @@ export default function FonctionnalitesPage() {
           </p>
         </section>
 
-        {/* Navigation rapide vers chaque module */}
+        {/* Navigation rapide vers chaque module — défilement horizontal sur
+            mobile plutôt qu'un empilement sur plusieurs lignes */}
         <nav
           aria-label="Navigation des fonctionnalités"
-          className="flex flex-wrap justify-center gap-2 pb-12"
+          className="pills-scroll flex flex-nowrap overflow-x-auto gap-2.5 pb-12 px-1 -mx-1"
         >
           {FEATURES.map((f) => (
             <a
               key={f.slug}
               href={`#${f.slug}`}
-              className="rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition py-1.5 px-4 text-xs font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
+              className="flex-shrink-0 whitespace-nowrap rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition py-1.5 px-4 text-xs font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
             >
               {f.titre}
             </a>
           ))}
         </nav>
 
-        <div className="space-y-6 pb-16">
+        <div className="space-y-8 pb-16">
           {FEATURES.map((f) => (
             <section
               key={f.slug}
@@ -79,11 +63,11 @@ export default function FonctionnalitesPage() {
             >
               <div className="flex items-start gap-4">
                 <div
-                  className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
+                  className="flex-shrink-0 w-14 h-14 rounded-xl flex items-center justify-center"
                   style={{ backgroundColor: `${f.color}22` }}
                 >
                   <svg
-                    className="w-6 h-6"
+                    className="w-7 h-7"
                     style={{ color: f.color }}
                     fill="none"
                     viewBox="0 0 24 24"
