@@ -3,117 +3,11 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import Logo from "@/components/ui/Logo";
 import JsonLd from "@/components/seo/JsonLd";
+import { FEATURES } from "@/lib/content/features";
 
 export const metadata = {
   alternates: { canonical: "/" },
 };
-
-const FONCTIONNALITES = [
-  {
-    color: "#6366f1",
-    titre: "Gestion financière",
-    description: "Centralise revenus, dépenses, épargne, dettes et investissements en un seul endroit clair.",
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M3 10h18M3 6a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V6z M7 15h4"
-      />
-    ),
-  },
-  {
-    color: "#10b981",
-    titre: "Assistant IA",
-    description: "Un assistant conversationnel pour réfléchir à tes décisions financières, professionnelles, administratives et personnelles.",
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8-1.5 0-2.91-.32-4.14-.9L3 20l1.1-3.6C3.4 15.1 3 13.6 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-      />
-    ),
-  },
-  {
-    color: "#06b6d4",
-    titre: "Projection financière",
-    description: "Visualise l'évolution de ton épargne, tes dettes et tes investissements sur 10 à 100 ans.",
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M3 17l6-6 4 4 8-8M21 7v6M21 7h-6"
-      />
-    ),
-  },
-  {
-    color: "#f59e0b",
-    titre: "Objectifs de vie",
-    description: "Fixe un objectif financier concret et suis en temps réel combien de temps il te faudra pour l'atteindre.",
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M12 2v4m0 12v4m10-10h-4M6 12H2m15.07-7.07l-2.83 2.83M9.76 14.24l-2.83 2.83m0-10.14l2.83 2.83m4.48 4.48l2.83 2.83M12 8a4 4 0 100 8 4 4 0 000-8z"
-      />
-    ),
-  },
-  {
-    color: "#a855f7",
-    titre: "Analyse personnalisée",
-    description: "Un conseiller IA qui génère des conseils à partir de ta situation réelle, pas des généralités.",
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M11 4a7 7 0 100 14 7 7 0 000-14zM21 21l-4.35-4.35"
-      />
-    ),
-  },
-  {
-    color: "#ef4444",
-    titre: "Sécurité des données",
-    description: "Chiffrement, accès restreint et contrôle total : consulte, exporte ou supprime tes données à tout moment.",
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4zM9 12l2 2 4-4"
-      />
-    ),
-  },
-  {
-    color: "#eab308",
-    titre: "Opportunités adaptées",
-    description: "Découvre les aides, bourses et crédits d'impôt auxquels tu pourrais être admissible selon ta province.",
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M20 12v8a1 1 0 01-1 1H5a1 1 0 01-1-1v-8M2 7h20v5H2V7zM12 22V7M12 7c0-1.657-1.343-4-3-4S6 5.343 6 7h6zm0 0c0-1.657 1.343-4 3-4s3 2.343 3 4h-6z"
-      />
-    ),
-  },
-  {
-    color: "#ec4899",
-    titre: "Scénarios de vie",
-    description: "Compare plusieurs rythmes d'épargne et scénarios pour voir leur impact concret sur ton avenir.",
-    icon: (
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M6 3v12a3 3 0 003 3h9m-9-9a3 3 0 100-6 3 3 0 000 6zm12 6a3 3 0 11-6 0 3 3 0 016 0zm-6-9a3 3 0 116 0 3 3 0 01-6 0z"
-      />
-    ),
-  },
-];
 
 const AVANTAGES = [
   "Analyse personnalisée, pas des conseils génériques",
@@ -191,12 +85,12 @@ export default async function Home() {
               >
                 Commencer gratuitement
               </Link>
-              <a
-                href="#fonctionnalites"
+              <Link
+                href="/fonctionnalites"
                 className="link-button rounded-lg bg-white/10 hover:bg-white/20 transition py-3 px-8 text-base font-semibold"
               >
                 Découvrir les fonctionnalités
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -237,7 +131,7 @@ export default async function Home() {
         </section>
 
         {/* Fonctionnalités */}
-        <section id="fonctionnalites" className="py-12 md:py-20 scroll-mt-20">
+        <section className="py-12 md:py-20">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-3">
             Tout ce qu&apos;il te faut pour piloter ton avenir
           </h2>
@@ -245,8 +139,8 @@ export default async function Home() {
             Huit outils pensés pour te donner une vision complète et concrète de ta situation.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {FONCTIONNALITES.map((f) => (
-              <div key={f.titre} className="glass rounded-2xl p-6">
+            {FEATURES.map((f) => (
+              <div key={f.slug} className="glass rounded-2xl p-6">
                 <svg
                   className="w-8 h-8 mb-4"
                   style={{ color: f.color }}
@@ -262,6 +156,14 @@ export default async function Home() {
                 </p>
               </div>
             ))}
+          </div>
+          <div className="text-center mt-8">
+            <Link
+              href="/fonctionnalites"
+              className="text-sm text-[var(--color-secondary)] hover:underline"
+            >
+              Voir le détail de chaque fonctionnalité →
+            </Link>
           </div>
         </section>
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Logo from "@/components/ui/Logo";
 
 const LIENS = [
+  { href: "/fonctionnalites", label: "Fonctionnalités" },
   { href: "/a-propos", label: "À propos" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
