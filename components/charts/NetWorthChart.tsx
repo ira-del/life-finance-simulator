@@ -17,7 +17,7 @@ import {
   FinancialInputs,
 } from "@/lib/finance/projectNetWorth";
 
-const DUREES = [10, 20, 40, 60, 80, 100];
+const DUREES = [1, 5, 10];
 
 const UNITES = [
   { valeur: "jours", label: "jour(s)" },
@@ -59,7 +59,7 @@ function convertirEnMois(valeur: number, unite: Unite): number {
 }
 
 export default function NetWorthChart({ inputs }: { inputs: FinancialInputs }) {
-  const [duree, setDuree] = useState(40);
+  const [duree, setDuree] = useState(5);
   const [mensuel, setMensuel] = useState(false);
   const [courbesActives, setCourbesActives] = useState<Set<string>>(
     new Set(["patrimoineNet"])
@@ -176,7 +176,7 @@ export default function NetWorthChart({ inputs }: { inputs: FinancialInputs }) {
                     : "bg-white/5 text-[var(--color-text-secondary)] hover:bg-white/10"
                 }`}
               >
-                {d} ans
+                {d} an{d > 1 ? "s" : ""}
               </button>
             ))}
             <button
